@@ -3,15 +3,16 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = []
 
 const readSlice = createSlice({
-    name: "favourite slice",
+    name: "read slice",
     initialState,
     reducers: {
         addToRead: (state, action) => {
             const isPresent = state.includes(action.payload)
-            return isPresent ? state : [...state, action.payload]
+            // console.log(isPresent)
+            return isPresent ? [...state] : [...state, action.payload]
         }
     }
 })
 
-export const { addToFavourite } = readSlice.actions
+export const { addToRead } = readSlice.actions
 export default readSlice.reducer

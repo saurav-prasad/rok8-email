@@ -31,7 +31,14 @@ function Body({ senderData }) {
 
     const onFavClick = (e) => {
         e.preventDefault()
-        // console.log(fav)
+
+        const id = searchParams.get("id")
+
+        const newFav = fav.includes(id)
+            ? fav.filter((item) => item !== id)
+            : [...fav, id]
+
+        localStorage.setItem('favourites', JSON.stringify(newFav))
 
         fav.includes(searchParams.get("id")) ?
             dispatch(removeFromFavourite(searchParams.get("id"))) :
@@ -39,14 +46,14 @@ function Body({ senderData }) {
     }
     return (
         // flex-7
-        <section className='relative hideScrollBar flex flex-row space-x-5 bg-[#fff] p-8 mt-[24px] rounded-xl max-w-[64%] h-[91.2vh] overflow-y-auto'>
-            <XCircleIcon onClick={()=>navigate("/")} className='absolute left-2 top-2 w-8 cursor-pointer' />
+        <section className='relative hideScrollBar flex flex-row space-x-5 bg-[#fff] p-8 lg:mt-[24px] rounded-xl h-[91.2vh] overflow-y-auto'>
+            <XCircleIcon onClick={() => navigate("/")} className='absolute left-2 top-2 w-10 sm:w-8 cursor-pointer' />
             {data && <>
-                <span className='rounded-full bg-[#e54065] text-white py-3 px-5 text-3xl leading-8 h-min'>{data?.name[0]}</span>
+                <span className='sm:block hidden rounded-full bg-[#e54065] text-white py-3 px-5 text-3xl leading-8 h-min'>{data?.name[0]}</span>
                 <div className='flex flex-col space-y-5'>
                     <div className='flex justify-between'>
-                        <h1 className='text-2xl font-bold'>{data.name}</h1>
-                        <button onClick={onFavClick} className='bg-[#e54065] px-5 py-1 rounded-full text-sm text-white font-medium'>{fav.includes(searchParams.get("id")) ? "Remove as favourite" : "Mark as favourite"}</button>
+                        <h1 className='sm:text-2xl font-bold'>{data.name}</h1>
+                        <button onClick={onFavClick} className='bg-[#e54065] px-2 lg:px-5 py-1 rounded-full text-sm text-white font-medium'>{fav.includes(searchParams.get("id")) ? "Remove as favourite" : "Mark as favourite"}</button>
                     </div>
                     <span className='font-normal'>{data.date}</span>
                     <p>

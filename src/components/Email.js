@@ -18,9 +18,15 @@ function Email() {
 
   return (
     <>
-      <main className={`${(searchParams.get("id") && data !== undefined) && "flex space-x-8"}`}>
-        <List passData={passData} />
-        {(searchParams.get("id") && data !== undefined) && <Body senderData={data} />}
+      <main className={`${(searchParams.get("id") && data !== undefined) && "lg:flex lg:flex-row lg:space-x-8"}`}>
+        <section className={`${(searchParams.get("id") && data !== undefined) && "lg:block hidden"}`}>
+          <List passData={passData} />
+        </section>
+
+        <section className={`${!(searchParams.get("id") && data !== undefined) && "lg:block hidden"} w-full lg:max-w-[64%] `}>
+          {(searchParams.get("id") && data !== undefined) && <Body senderData={data} />}
+        </section>
+
       </main >
     </>
   )
